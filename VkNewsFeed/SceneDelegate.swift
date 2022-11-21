@@ -8,10 +8,16 @@
 import UIKit
 import VKSdkFramework
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, AuthServiceDelegate {
 
     var window: UIWindow?
     var authService: AuthService!
+    
+    static func shared() -> SceneDelegate {
+        let scene = UIApplication.shared.connectedScenes.first
+        let sd: SceneDelegate = (((scene?.delegate as? SceneDelegate)!))
+        return sd
+    }
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -22,6 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         authService = AuthService()
+        authService.delegate = self
         let authVC = UIStoryboard(name: "AuthViewController", bundle: nil).instantiateInitialViewController() as? AuthViewController
         window?.rootViewController = authVC
         window?.makeKeyAndVisible()
@@ -62,7 +69,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
+    
+//    MARK: - AuthServiceDelegate
+    func authServiceShouldShow(viewController: UIViewController) {
+        window?.rootViewController?.present(viewController, animated: true)
+    }
+    
+    func authServiceSignIn() {
+        print(#function)
+        let feedVC = UIStoryboard(name: "FeedViewController", bundle: nil).instantiateInitialViewController() as! FeedViewController
+        let navVC = UINavigationController(rootViewController: feedVC)
+        window?.rootViewController = feedVC
+    }
+    
+    func authSeviceSignInDidFail() {
+        print(#function)
+    }
 
 }
 
