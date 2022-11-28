@@ -31,16 +31,6 @@ class NetworkService: Networking {
         print(url)
     }
     
-    func getFeed() {
-        guard let token = authService.token else { return }
-        let parameters = ["filters": "post, photo"]
-        var allParameters = parameters
-        allParameters["access_token"] = token
-        allParameters["v"] = API.version
-        let url = url(from: API.newsfeed, parameters: allParameters)
-        print(url)
-    }
-    
     private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
         return URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             DispatchQueue.main.async {
