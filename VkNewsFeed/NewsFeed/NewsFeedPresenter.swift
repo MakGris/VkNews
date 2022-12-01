@@ -16,7 +16,14 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
   weak var viewController: NewsFeedDisplayLogic?
   
   func presentData(response: NewsFeed.Model.Response.ResponseType) {
-  
+      switch response {
+          
+      case .some:
+          print(".some Presenter")
+      case .presentNewsFeed:
+          print(".presentNewsFeed Presenter")
+          viewController?.displayData(viewModel: .displayNewsFeed)
+      }
   }
   
 }

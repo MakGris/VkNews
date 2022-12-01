@@ -13,6 +13,8 @@
 		D515E4902925145600FF13F9 /* VKSdkFramework.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D515E48E2925145600FF13F9 /* VKSdkFramework.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D521A5BD292CE8740001CB0F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D521A5BC292CE8740001CB0F /* NetworkService.swift */; };
 		D521A5BF292CE94B0001CB0F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D521A5BE292CE94B0001CB0F /* API.swift */; };
+		D54E8CC32938D11A005C83AB /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54E8CC22938D11A005C83AB /* NewsFeedCell.swift */; };
+		D54E8CC52938D15C005C83AB /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D54E8CC42938D15C005C83AB /* NewsFeedCell.xib */; };
 		D5543200292506F800EAF079 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55431FF292506F800EAF079 /* AppDelegate.swift */; };
 		D5543202292506F800EAF079 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5543201292506F800EAF079 /* SceneDelegate.swift */; };
 		D5543204292506F800EAF079 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5543203292506F800EAF079 /* AuthViewController.swift */; };
@@ -51,6 +53,8 @@
 		D515E48E2925145600FF13F9 /* VKSdkFramework.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = VKSdkFramework.xcframework; path = Carthage/Build/VKSdkFramework.xcframework; sourceTree = "<group>"; };
 		D521A5BC292CE8740001CB0F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		D521A5BE292CE94B0001CB0F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		D54E8CC22938D11A005C83AB /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
+		D54E8CC42938D15C005C83AB /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
 		D55431FC292506F800EAF079 /* VkNewsFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VkNewsFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55431FF292506F800EAF079 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5543201292506F800EAF079 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,15 @@
 				D515E48E2925145600FF13F9 /* VKSdkFramework.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D54E8CC12938D0CC005C83AB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D54E8CC22938D11A005C83AB /* NewsFeedCell.swift */,
+				D54E8CC42938D15C005C83AB /* NewsFeedCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D55431F3292506F800EAF079 = {
@@ -165,6 +178,7 @@
 		D5B8B34A29362EC000112F7E /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				D54E8CC12938D0CC005C83AB /* Cell */,
 				D589D23C293779E500880CF8 /* NewsFeedViewController.storyboard */,
 				D5B8B34F29362F0C00112F7E /* NewsFeedViewController.swift */,
 				D5B8B35029362F0C00112F7E /* NewsFeedInteractor.swift */,
@@ -237,6 +251,7 @@
 			files = (
 				D589D23D293779E500880CF8 /* NewsFeedViewController.storyboard in Resources */,
 				D554320C292506F900EAF079 /* LaunchScreen.storyboard in Resources */,
+				D54E8CC52938D15C005C83AB /* NewsFeedCell.xib in Resources */,
 				D5018CC1292652F200F04675 /* AuthViewController.storyboard in Resources */,
 				D5543209292506F900EAF079 /* Assets.xcassets in Resources */,
 				D5D27766292B9EAA006516CE /* FeedViewController.storyboard in Resources */,
@@ -264,6 +279,7 @@
 				D5018CBE292650B300F04675 /* AuthService.swift in Sources */,
 				D521A5BF292CE94B0001CB0F /* API.swift in Sources */,
 				D5B8B35529362F0C00112F7E /* NewsFeedModels.swift in Sources */,
+				D54E8CC32938D11A005C83AB /* NewsFeedCell.swift in Sources */,
 				D5B8B35629362F0C00112F7E /* NewsFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

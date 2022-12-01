@@ -44,12 +44,17 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
   override func viewDidLoad() {
     super.viewDidLoad()
       setup()
-      
-      table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+      table.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
   }
   
   func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
-
+      switch viewModel {
+          
+      case .some:
+          print(".some ViewController")
+      case .displayNewsFeed:
+          print(".displayNewsFeed ViewController")
+      }
   }
   
 }
@@ -60,16 +65,19 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
-        var content = cell.defaultContentConfiguration()
-        content.text = "index: \(indexPath.row)"
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
+//        var content = cell.defaultContentConfiguration()
+//        content.text = "index: \(indexPath.row)"
+//        cell.contentConfiguration = content
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("select row")
+        interactor?.makeRequest(request: .getFeed)
     }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        212
+    }
     
 }
