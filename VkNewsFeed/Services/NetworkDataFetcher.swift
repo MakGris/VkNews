@@ -13,9 +13,11 @@ protocol DataFetcher {
 struct NetworkDataFetcher: DataFetcher {
     
     let networking: Networking
+    
     init(networking: Networking) {
         self.networking = networking
     }
+    
     func getFeed(response: @escaping (FeedResponse?) -> Void) {
         let parameters = ["filters": "post, photo"]
         networking.request(path: API.newsfeed, parameters: parameters) { data, error in
