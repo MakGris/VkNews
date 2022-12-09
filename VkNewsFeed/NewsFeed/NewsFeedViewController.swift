@@ -9,58 +9,58 @@
 import UIKit
 
 protocol NewsFeedDisplayLogic: AnyObject {
-  func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
+    func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData)
 }
 
 class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic {
-
-  var interactor: NewsFeedBusinessLogic?
-  var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
-private var feedViewModel = FeedViewModel(cells: [])
-
+    
+    var interactor: NewsFeedBusinessLogic?
+    var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
+    private var feedViewModel = FeedViewModel(cells: [])
+    
     @IBOutlet weak var table: UITableView!
     // MARK: Object lifecycle
-  
-  
-  // MARK: Setup
-  
-  private func setup() {
-    let viewController        = self
-    let interactor            = NewsFeedInteractor()
-    let presenter             = NewsFeedPresenter()
-    let router                = NewsFeedRouter()
-    viewController.interactor = interactor
-    viewController.router     = router
-    interactor.presenter      = presenter
-    presenter.viewController  = viewController
-    router.viewController     = viewController
-  }
-  
-  // MARK: Routing
-  
-
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-      setup()
-      table.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
-      table.separatorStyle = .none
-      table.backgroundColor = .clear
-      view.backgroundColor = .blue
-      interactor?.makeRequest(request: .getNewsFeed)
-  }
-  
-  func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
-      switch viewModel {
-      
-      case .displayNewsFeed(feedViewModel: let feedViewModel):
-          self.feedViewModel = feedViewModel
-          table.reloadData()
-      }
-  }
-  
+    
+    
+    // MARK: Setup
+    
+    private func setup() {
+        let viewController        = self
+        let interactor            = NewsFeedInteractor()
+        let presenter             = NewsFeedPresenter()
+        let router                = NewsFeedRouter()
+        viewController.interactor = interactor
+        viewController.router     = router
+        interactor.presenter      = presenter
+        presenter.viewController  = viewController
+        router.viewController     = viewController
+    }
+    
+    // MARK: Routing
+    
+    
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+        table.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
+        table.separatorStyle = .none
+        table.backgroundColor = .clear
+        view.backgroundColor = .blue
+        interactor?.makeRequest(request: .getNewsFeed)
+    }
+    
+    func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
+        switch viewModel {
+            
+        case .displayNewsFeed(feedViewModel: let feedViewModel):
+            self.feedViewModel = feedViewModel
+            table.reloadData()
+        }
+    }
+    
 }
 
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
@@ -72,9 +72,9 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
-//        var content = cell.defaultContentConfiguration()
-//        content.text = "index: \(indexPath.row)"
-//        cell.contentConfiguration = content
+        //        var content = cell.defaultContentConfiguration()
+        //        content.text = "index: \(indexPath.row)"
+        //        cell.contentConfiguration = content
         return cell
     }
     
