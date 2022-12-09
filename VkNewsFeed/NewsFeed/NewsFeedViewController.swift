@@ -46,6 +46,9 @@ private var feedViewModel = FeedViewModel(cells: [])
     super.viewDidLoad()
       setup()
       table.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
+      table.separatorStyle = .none
+      table.backgroundColor = .clear
+      view.backgroundColor = .blue
       interactor?.makeRequest(request: .getNewsFeed)
   }
   
