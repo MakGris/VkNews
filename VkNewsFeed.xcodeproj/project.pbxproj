@@ -31,6 +31,7 @@
 		D5B8B35529362F0C00112F7E /* NewsFeedModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8B34E29362F0C00112F7E /* NewsFeedModels.swift */; };
 		D5B8B35629362F0C00112F7E /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8B34F29362F0C00112F7E /* NewsFeedViewController.swift */; };
 		D5B8B35729362F0C00112F7E /* NewsFeedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B8B35029362F0C00112F7E /* NewsFeedInteractor.swift */; };
+		D5D3C49E294752060046628C /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3C49D294752060046628C /* String + Height.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -73,6 +74,7 @@
 		D5B8B34E29362F0C00112F7E /* NewsFeedModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedModels.swift; sourceTree = "<group>"; };
 		D5B8B34F29362F0C00112F7E /* NewsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedViewController.swift; sourceTree = "<group>"; };
 		D5B8B35029362F0C00112F7E /* NewsFeedInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedInteractor.swift; sourceTree = "<group>"; };
+		D5D3C49D294752060046628C /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				D578E6082942E941004C3542 /* WebImageView.swift */,
+				D5D3C49D294752060046628C /* String + Height.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D56E93EC2934CB2F0015228A /* FeedResponse.swift in Sources */,
+				D5D3C49E294752060046628C /* String + Height.swift in Sources */,
 				D5B8B35229362F0C00112F7E /* NewsFeedPresenter.swift in Sources */,
 				D5543204292506F800EAF079 /* AuthViewController.swift in Sources */,
 				D5543200292506F800EAF079 /* AppDelegate.swift in Sources */,
