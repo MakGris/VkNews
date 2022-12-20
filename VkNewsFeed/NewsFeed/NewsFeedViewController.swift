@@ -71,20 +71,20 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.reuseId, for: indexPath) as! NewsFeedCell
-//        let cellViewModel = feedViewModel.cells[indexPath.row]
-//        cell.set(viewModel: cellViewModel)
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath)
-                var content = cell.defaultContentConfiguration()
-                content.text = "index: \(indexPath.row)"
-                cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath) as! NewsFeedCodeCell
+        let cellViewModel = feedViewModel.cells[indexPath.row]
+        cell.set(viewModel: cellViewModel)
+        
+//                var content = cell.defaultContentConfiguration()
+//                content.text = "index: \(indexPath.row)"
+//                cell.contentConfiguration = content
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellViewModel = feedViewModel.cells[indexPath.row]
-//        return cellViewModel.sizes.totalHeight
-       return 212
+        return cellViewModel.sizes.totalHeight
     }
     
 }
