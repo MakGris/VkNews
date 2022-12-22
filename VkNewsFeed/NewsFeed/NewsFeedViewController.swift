@@ -74,10 +74,6 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsFeedCodeCell.reuseId, for: indexPath) as! NewsFeedCodeCell
         let cellViewModel = feedViewModel.cells[indexPath.row]
         cell.set(viewModel: cellViewModel)
-        
-//                var content = cell.defaultContentConfiguration()
-//                content.text = "index: \(indexPath.row)"
-//                cell.contentConfiguration = content
         return cell
     }
     
