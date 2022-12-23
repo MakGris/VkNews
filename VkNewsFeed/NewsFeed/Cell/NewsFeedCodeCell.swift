@@ -8,9 +8,15 @@
 import Foundation
 import UIKit
 
+protocol NewsFeedCodeCellDelegate: AnyObject {
+    func revealPost(for cell: NewsFeedCodeCell)
+}
+
 class NewsFeedCodeCell: UITableViewCell {
     
     static let reuseId = "NewsFeedCodeCell"
+    
+    weak var delegate: NewsFeedCodeCellDelegate?
     
     //MARK: - Первый слой
     let cardView: UIView = {
@@ -25,7 +31,6 @@ class NewsFeedCodeCell: UITableViewCell {
     let topView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .purple
         return view
     }()
     
@@ -33,20 +38,27 @@ class NewsFeedCodeCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = Constants.postLabelFont
-//        label.backgroundColor = UIColor(red: 44/255, green: 45/255, blue: 46/255, alpha: 1)
         label.textColor = .black
         return label
     }()
     
+    let moreTextButton: UIButton = {
+        let button = UIButton()
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.setTitleColor(UIColor(red: 102/255, green: 159/255, blue: 212/255, alpha: 1), for: .normal)
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
+        button.setTitle("Показать полностью...", for: .normal)
+        return button
+    }()
+    
     let postImageView: WebImageVIew = {
         let imageView = WebImageVIew()
-//        imageView.backgroundColor = UIColor(red: 227/255, green: 229/255, blue: 232/255, alpha: 1)
         return imageView
     }()
     
     let bottomView: UIView = {
         let view = UIView()
-//        view.backgroundColor = .yellow
         return view
     }()
     
@@ -56,7 +68,6 @@ class NewsFeedCodeCell: UITableViewCell {
     let iconImageView: WebImageVIew = {
         let imageView = WebImageVIew()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.backgroundColor = .blue
         return imageView
     }()
     
@@ -66,7 +77,6 @@ class NewsFeedCodeCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         label.numberOfLines = 0
         label.textColor = .black
-//        label.backgroundColor = .green
         return label
     }()
     
@@ -75,7 +85,6 @@ class NewsFeedCodeCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(red: 129/255, green: 140/255, blue: 153/255, alpha: 1)
         label.font = UIFont.systemFont(ofSize: 12)
-//        label.backgroundColor = .cyan
         return label
     }()
     
@@ -84,28 +93,24 @@ class NewsFeedCodeCell: UITableViewCell {
     let likesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .purple
         return view
     }()
     
     let commentsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .blue
         return view
     }()
     
     let sharesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .brown
         return view
     }()
     
     let viewsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .magenta
         return view
     }()
     
@@ -175,20 +180,36 @@ class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
+    override func prepareForReuse() {
+        iconImageView.set(imageUrl: nil)
+        postImageView.set(imageUrl: nil)
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        iconImageView.layer.cornerRadius = Constants.topViewHeight / 2
+        iconImageView.clipsToBounds = true
+        
         backgroundColor = .clear
         selectionStyle = .none
         
         cardView.layer.cornerRadius = 10
         cardView.clipsToBounds = true
+        
+        moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
+        
         overlayFirstLayer() //первый слой
         overlaySecondLayer() //второй слой
         overlayThirdLayerOnTopView() //третий слой на topView
         overlayThirdLayerOnBottomView() //третий слой на bottomView
         overlayFourthLayerOnBottomViewViews() //четвертый слой на bottomView
         
+    }
+    
+    @objc func moreTextButtonTouch() {
+        print("123")
+        delegate?.revealPost(for: self)
     }
     
     func set(viewModel: FeedCellViewModel) {
@@ -205,6 +226,7 @@ class NewsFeedCodeCell: UITableViewCell {
         postLabel.frame = viewModel.sizes.postLabelFrame
         postImageView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
+        moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
         
         if let photoAttachment = viewModel.photoAttachment {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)
@@ -322,6 +344,7 @@ class NewsFeedCodeCell: UITableViewCell {
         cardView.addSubview(postLabel)
         cardView.addSubview(postImageView)
         cardView.addSubview(bottomView)
+        cardView.addSubview(moreTextButton)
         
         //        topView constraints
         topView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 8).isActive = true
@@ -330,11 +353,17 @@ class NewsFeedCodeCell: UITableViewCell {
         topView.heightAnchor.constraint(equalToConstant: Constants.topViewHeight).isActive = true
         
         //        postLabel constraints
+        // не нужно, так как размеры задаются динамически
+        
+        //        moreTextButton constraints
+        // не нужно, так как размеры задаются динамически
         
         //        postImageView constraints
         
-        //        bottomView constraints
+        // не нужно, так как размеры задаются динамически
         
+        //        bottomView constraints
+        // не нужно, так как размеры задаются динамически
         
     }
     
