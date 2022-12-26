@@ -196,8 +196,9 @@ class NewsFeedCodeCell: UITableViewCell {
         
         cardView.layer.cornerRadius = 10
         cardView.clipsToBounds = true
-        
         moreTextButton.addTarget(self, action: #selector(moreTextButtonTouch), for: .touchUpInside)
+        
+        
         
         overlayFirstLayer() //первый слой
         overlaySecondLayer() //второй слой
@@ -342,9 +343,9 @@ class NewsFeedCodeCell: UITableViewCell {
     private func overlaySecondLayer() {
         cardView.addSubview(topView)
         cardView.addSubview(postLabel)
+        cardView.addSubview(moreTextButton)
         cardView.addSubview(postImageView)
         cardView.addSubview(bottomView)
-        cardView.addSubview(moreTextButton)
         
         //        topView constraints
         topView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 8).isActive = true
@@ -368,7 +369,7 @@ class NewsFeedCodeCell: UITableViewCell {
     }
     
     private func overlayFirstLayer() {
-        addSubview(cardView)
+        contentView.addSubview(cardView)
         //        cardView constraints
         cardView.fillSuperview(padding: Constants.cardInsets)
     }
