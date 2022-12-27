@@ -51,6 +51,7 @@ class NewsFeedCodeCell: UITableViewCell {
         button.setTitle("Показать полностью...", for: .normal)
         return button
     }()
+    let galleryCollectionView = GalleryCollectionView()
     
     let postImageView: WebImageVIew = {
         let imageView = WebImageVIew()
@@ -62,7 +63,7 @@ class NewsFeedCodeCell: UITableViewCell {
         return view
     }()
     
-
+    
     //MARK: - Третий слой на TopView
     
     let iconImageView: WebImageVIew = {
@@ -117,35 +118,35 @@ class NewsFeedCodeCell: UITableViewCell {
     //MARK: - четвертый слой на bottomView
     
     let likesImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "like")
         return imageView
     }()
     
     let commentsImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "comment")
         return imageView
     }()
     
     let sharesImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "share")
         return imageView
     }()
     
     let viewsImage: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "eye")
         return imageView
     }()
     
     let likesLabel: UILabel = {
-    let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -154,7 +155,7 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     let commentsLabel: UILabel = {
-    let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -163,7 +164,7 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     let sharesLabel: UILabel = {
-    let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -172,7 +173,7 @@ class NewsFeedCodeCell: UITableViewCell {
     }()
     
     let viewsLabel: UILabel = {
-    let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .darkGray
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
@@ -225,21 +226,29 @@ class NewsFeedCodeCell: UITableViewCell {
         viewsLabel.text = viewModel.views
         
         postLabel.frame = viewModel.sizes.postLabelFrame
-        postImageView.frame = viewModel.sizes.attachmentFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
         moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
         
-        if let photoAttachment = viewModel.photoAttachment {
+        if let photoAttachment = viewModel.photoAttachments.first, viewModel.photoAttachments.count == 1 {
             postImageView.set(imageUrl: photoAttachment.photoUrlString)
             postImageView.isHidden = false
-        } else {
+            galleryCollectionView.isHidden = true
+            postImageView.frame = viewModel.sizes.attachmentFrame
+        } else if viewModel.photoAttachments.count > 1 {
+            galleryCollectionView.frame = viewModel.sizes.attachmentFrame
             postImageView.isHidden = true
+            galleryCollectionView.isHidden = false
+            galleryCollectionView.set(photos: viewModel.photoAttachments)
+        }
+        else {
+            postImageView.isHidden = true
+            galleryCollectionView.isHidden = true
         }
     }
     
     private func helpInFourLayer(view: UIView, imageView: UIImageView, label: UILabel) {
         
-//    imageView Constraints
+        //    imageView Constraints
         imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: Constants.bottomViewViewsIconSize).isActive = true
@@ -345,6 +354,7 @@ class NewsFeedCodeCell: UITableViewCell {
         cardView.addSubview(postLabel)
         cardView.addSubview(moreTextButton)
         cardView.addSubview(postImageView)
+        cardView.addSubview(galleryCollectionView)
         cardView.addSubview(bottomView)
         
         //        topView constraints
@@ -373,14 +383,6 @@ class NewsFeedCodeCell: UITableViewCell {
         //        cardView constraints
         cardView.fillSuperview(padding: Constants.cardInsets)
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
