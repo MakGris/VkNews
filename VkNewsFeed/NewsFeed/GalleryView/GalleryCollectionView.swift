@@ -15,7 +15,8 @@ class GalleryCollectionView: UICollectionView {
     init() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        super.init(frame: .zero, collectionViewLayout: layout)
+        let rowLayout = Rowlayout()
+        super.init(frame: .zero, collectionViewLayout: rowLayout)
         
         delegate = self
         dataSource = self
@@ -35,7 +36,7 @@ class GalleryCollectionView: UICollectionView {
     }
 }
 
-extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photos.count
@@ -45,5 +46,9 @@ extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         let cell = dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.reuseId, for: indexPath) as! GalleryCollectionViewCell
         cell.set(imageUrl: photos[indexPath.row].photoUrlString)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: frame.width, height: frame.height)
     }
 }
