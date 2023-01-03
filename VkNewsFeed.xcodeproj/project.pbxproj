@@ -38,6 +38,9 @@
 		D5D3C49E294752060046628C /* String + Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D3C49D294752060046628C /* String + Height.swift */; };
 		D5FB29D429507E460000C32A /* NewsFeedCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FB29D329507E460000C32A /* NewsFeedCodeCell.swift */; };
 		D5FB29D6295085F00000C32A /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FB29D5295085F00000C32A /* Constraints.swift */; };
+		D5FEA7B0296404A200EB67BA /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FEA7AF296404A200EB67BA /* TitleView.swift */; };
+		D5FEA7B22964054200EB67BA /* InsetableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FEA7B12964054200EB67BA /* InsetableTextField.swift */; };
+		D5FEA7B429640CA500EB67BA /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FEA7B329640CA500EB67BA /* UserResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +90,9 @@
 		D5D3C49D294752060046628C /* String + Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Height.swift"; sourceTree = "<group>"; };
 		D5FB29D329507E460000C32A /* NewsFeedCodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCodeCell.swift; sourceTree = "<group>"; };
 		D5FB29D5295085F00000C32A /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		D5FEA7AF296404A200EB67BA /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		D5FEA7B12964054200EB67BA /* InsetableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetableTextField.swift; sourceTree = "<group>"; };
+		D5FEA7B329640CA500EB67BA /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				D56E93EB2934CB2F0015228A /* FeedResponse.swift */,
+				D5FEA7B329640CA500EB67BA /* UserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +215,7 @@
 			children = (
 				D58874BE295B1272006F159A /* GalleryView */,
 				D54E8CC12938D0CC005C83AB /* Cell */,
+				D5FEA7AE2964046400EB67BA /* TitleView */,
 				D589D23C293779E500880CF8 /* NewsFeedViewController.storyboard */,
 				D5B8B34F29362F0C00112F7E /* NewsFeedViewController.swift */,
 				D5B8B35029362F0C00112F7E /* NewsFeedInteractor.swift */,
@@ -217,6 +225,15 @@
 				D5B8B34D29362F0C00112F7E /* NewsFeedRouter.swift */,
 			);
 			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		D5FEA7AE2964046400EB67BA /* TitleView */ = {
+			isa = PBXGroup;
+			children = (
+				D5FEA7AF296404A200EB67BA /* TitleView.swift */,
+				D5FEA7B12964054200EB67BA /* InsetableTextField.swift */,
+			);
+			path = TitleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,8 +324,10 @@
 				D56E93EE2934D9630015228A /* NetworkDataFetcher.swift in Sources */,
 				D5B8B35329362F0C00112F7E /* NewsFeedWorker.swift in Sources */,
 				D59533F4295199D500011AC2 /* Constants.swift in Sources */,
+				D5FEA7B0296404A200EB67BA /* TitleView.swift in Sources */,
 				D578E6092942E941004C3542 /* WebImageView.swift in Sources */,
 				D5FB29D6295085F00000C32A /* Constraints.swift in Sources */,
+				D5FEA7B429640CA500EB67BA /* UserResponse.swift in Sources */,
 				D5B8B35429362F0C00112F7E /* NewsFeedRouter.swift in Sources */,
 				D5018CBE292650B300F04675 /* AuthService.swift in Sources */,
 				D521A5BF292CE94B0001CB0F /* API.swift in Sources */,
@@ -317,6 +336,7 @@
 				D58874C0295B12B7006F159A /* GalleryCollectionView.swift in Sources */,
 				D5B8B35629362F0C00112F7E /* NewsFeedViewController.swift in Sources */,
 				D50CEAB6294331A400664E89 /* NewsFeedCellLayoutCalculator.swift in Sources */,
+				D5FEA7B22964054200EB67BA /* InsetableTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

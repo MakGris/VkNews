@@ -28,8 +28,13 @@ class AuthService: NSObject, VKSdkDelegate, VKSdkUIDelegate {
     }
     
     weak var delegate: AuthServiceDelegate?
+    
     var token: String? {
         VKSdk.accessToken().accessToken
+    }
+    
+    var userId: String? {
+        VKSdk.accessToken().userId
     }
     
     func wakeUpSession() {

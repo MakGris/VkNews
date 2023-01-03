@@ -19,6 +19,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
     private var feedViewModel = FeedViewModel(cells: [])
     
     @IBOutlet weak var table: UITableView!
+    private var titleView = TitleView()
     // MARK: Object lifecycle
     
     
@@ -45,20 +46,32 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupTopBars()
         table.register(UINib(nibName: "NewsFeedCell", bundle: nil), forCellReuseIdentifier: NewsFeedCell.reuseId)
         table.register(NewsFeedCodeCell.self, forCellReuseIdentifier: NewsFeedCodeCell.reuseId)
+        
         table.separatorStyle = .none
         table.backgroundColor = .clear
         view.backgroundColor = .blue
+        
         interactor?.makeRequest(request: .getNewsFeed)
+        interactor?.makeRequest(request: .getUser)
     }
-    
+    private func setupTopBars() {
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.titleView = titleView
+        
+    }
     func displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData) {
         switch viewModel {
             
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
             table.reloadData()
+            
+        case .displayUser(UserViewModel: let UserViewModel):
+            titleView.set(userViewModel: UserViewModel)
         }
     }
     //MARK: - NewsFeedCodeCellDelegate

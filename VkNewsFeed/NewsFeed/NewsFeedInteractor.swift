@@ -38,6 +38,11 @@ private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService
           presentFeed()
          
           print("111")
+          
+      case .getUser:
+          fetcher.getUser { userResponse in
+              self.presenter?.presentData(response:.presentUserInfo(user: userResponse) )
+          }
       }
   }
     private func presentFeed() {
