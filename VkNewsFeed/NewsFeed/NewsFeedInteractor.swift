@@ -29,15 +29,13 @@ private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService
           
       case .getNewsFeed:
           fetcher.getFeed { [weak self] feedResponse in
-            
               self?.feedResponse = feedResponse
               self?.presentFeed()
           }
+          
       case .revealPostIds(postId: let postId):
           revealedPostIds.append(postId)
           presentFeed()
-         
-          print("111")
           
       case .getUser:
           fetcher.getUser { userResponse in

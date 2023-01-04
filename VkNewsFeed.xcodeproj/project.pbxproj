@@ -216,7 +216,6 @@
 				D58874BE295B1272006F159A /* GalleryView */,
 				D54E8CC12938D0CC005C83AB /* Cell */,
 				D5FEA7AE2964046400EB67BA /* TitleView */,
-				D589D23C293779E500880CF8 /* NewsFeedViewController.storyboard */,
 				D5B8B34F29362F0C00112F7E /* NewsFeedViewController.swift */,
 				D5B8B35029362F0C00112F7E /* NewsFeedInteractor.swift */,
 				D5B8B34B29362F0C00112F7E /* NewsFeedPresenter.swift */,
@@ -232,6 +231,7 @@
 			children = (
 				D5FEA7AF296404A200EB67BA /* TitleView.swift */,
 				D5FEA7B12964054200EB67BA /* InsetableTextField.swift */,
+				D589D23C293779E500880CF8 /* NewsFeedViewController.storyboard */,
 			);
 			path = TitleView;
 			sourceTree = "<group>";
