@@ -56,9 +56,6 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
         setup()
         setupTable()
         setupTopBars()
-
-        view.backgroundColor = .blue
-        
         interactor?.makeRequest(request: .getNewsFeed)
         interactor?.makeRequest(request: .getUser)
     }
@@ -79,10 +76,19 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
     }
     
     private func setupTopBars() {
+//        let topBar = UIView(frame: view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+        let topBar = UIView(frame: UIApplication.shared.statusBarFrame)
+        topBar.backgroundColor = .white
+//        topBar.layer.shadowColor = UIColor.black.cgColor
+//        topBar.layer.shadowOpacity = 0.3
+//        topBar.layer.shadowOffset = CGSize.zero
+        topBar.layer.shadowRadius = 8
+        
+        self.view.addSubview(topBar)
         self.navigationController?.hidesBarsOnSwipe = true
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.titleView = titleView
-        
+
     }
     
     @objc private func refresh() {
