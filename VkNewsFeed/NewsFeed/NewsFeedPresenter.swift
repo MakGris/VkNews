@@ -9,12 +9,12 @@
 import UIKit
 
 protocol NewsFeedPresentationLogic {
-  func presentData(response: NewsFeed.Model.Response.ResponseType)
+    func presentData(response: NewsFeed.Model.Response.ResponseType)
 }
 
 class NewsFeedPresenter: NewsFeedPresentationLogic {
     
-  weak var viewController: NewsFeedDisplayLogic?
+    weak var viewController: NewsFeedDisplayLogic?
     var cellLayoutCalculator: FeedCellLayoutCalculatorProtocol = FeedCellLayoutCalculator()
     
     
@@ -25,24 +25,27 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         dt.dateFormat = "d MMM 'в' HH:mm"
         return dt
     }()
-  
-  func presentData(response: NewsFeed.Model.Response.ResponseType) {
-      switch response {
-      
-      case .presentNewsFeed(feed: let feed, let revealedPostIds):
-          
-          print(revealedPostIds)
-          let cells = feed.items.map { feedItem in
-              cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups, revealedPostIds: revealedPostIds)
-          }
-          let feedViewModel = FeedViewModel(cells: cells)
-          viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
-      
-      case .presentUserInfo(user: let user):
-          let userViewModel = UserViewModel(photoUrlString: user?.photo100)
-          viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayUser(UserViewModel: userViewModel))
-      }
-  }
+    
+    func presentData(response: NewsFeed.Model.Response.ResponseType) {
+        switch response {
+            
+        case .presentNewsFeed(feed: let feed, let revealedPostIds):
+            
+            print(revealedPostIds)
+            let cells = feed.items.map { feedItem in
+                cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups, revealedPostIds: revealedPostIds)
+            }
+            let footerTitle = String.localizedStringWithFormat(NSLocalizedString("newsfeed cells count", comment: ""), cells.count)
+            let feedViewModel = FeedViewModel(cells: cells, footerTitle: footerTitle)
+            viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
+            
+        case .presentUserInfo(user: let user):
+            let userViewModel = UserViewModel(photoUrlString: user?.photo100)
+            viewController?.displayData(viewModel: NewsFeed.Model.ViewModel.ViewModelData.displayUser(UserViewModel: userViewModel))
+        case .presentFooterLoader:
+            viewController?.displayData(viewModel: .displayFooterLoader)
+        }
+    }
     private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group], revealedPostIds: [Int]) -> FeedViewModel.Cell {
         let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
         
